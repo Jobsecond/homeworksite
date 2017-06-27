@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html lang={% trans 'LANGUAGE_CODE' %}>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{% trans 'TITLE_HOMEWORK' %}</title>
+    <link rel="stylesheet" type="text/css" href="/static/site/css/display.css"/>
+</head>
+<body>
+<h1>{% trans 'HEADER_HOMEWORK' %}</h1><br>
+<table border="0">
+    <tr>
+        <th>{% trans 'LESSON' %}</th>
+        <th>{% trans 'DATE' %}</th>
+        <th>{% trans 'SUBMIT' %}</th>
+        <th>{% trans 'DEADLINE' %}</th>
+        <th>{% trans 'HOMEWORK' %}</th>
+    </tr>
+    {% for y in homework_list %}
+    {% if y.valid %}
+    <tr{% if y.submit %} class="submit"{% endif %}>
+        <td>{{ y.name }}</td>
+        <td>{{ y.startdate }}</td>
+        <td class="center">{% if y.submit %}●{% else %}－{% endif %}</td>
+        <td>{{ y.deadline }}</td>
+        <td>{{ y.content | linebreaksbr }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+</body>
+</html>
