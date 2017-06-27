@@ -8,7 +8,7 @@ class Lesson(models.Model):
 
 
 class Homework(models.Model):
-    name = models.ForeignKey(Lesson)
+    name = models.ForeignKey(Lesson, verbose_name='课程')
     startdate = models.DateField(verbose_name='开始日期')
     submit = models.BooleanField(verbose_name='需要交')
     deadline = models.DateField(verbose_name='截止日期', blank=True, null=True)
@@ -19,4 +19,4 @@ class Homework(models.Model):
             content_ = self.content
         else:
             content_ = self.content[:32] + ' ...'
-        return '{0} >> {1}'.format(self.name, content_)
+        return '[{0}] {1}'.format(self.name, content_)
